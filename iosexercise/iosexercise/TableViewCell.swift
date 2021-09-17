@@ -19,17 +19,24 @@ class TableViewCell: UITableViewCell {
     @IBOutlet weak var authorLabel: UILabel!
     
     
-    @IBOutlet weak var contentLabel: UILabel!
+
     
     @IBOutlet weak var dateLabel: UILabel!
     
     
-    @IBOutlet weak var webLabel: UILabel!
+
     
 
+    
+    
+    
+    
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+        cellTitleLabel.numberOfLines=0
+      
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

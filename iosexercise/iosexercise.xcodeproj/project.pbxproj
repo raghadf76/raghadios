@@ -17,6 +17,7 @@
 		C94B976D26F03930001C905C /* iosexerciseUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C94B976C26F03930001C905C /* iosexerciseUITests.swift */; };
 		C955C6BC26F153FF0083A284 /* TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C955C6BB26F153FF0083A284 /* TableViewCell.swift */; };
 		C955C6C126F192EA0083A284 /* Article.swift in Sources */ = {isa = PBXBuildFile; fileRef = C955C6C026F192EA0083A284 /* Article.swift */; };
+		C9B78C6026F2CCB4002217AD /* DetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9B78C5F26F2CCB4002217AD /* DetailsViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,6 +54,7 @@
 		C94B976E26F03930001C905C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C955C6BB26F153FF0083A284 /* TableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewCell.swift; sourceTree = "<group>"; };
 		C955C6C026F192EA0083A284 /* Article.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Article.swift; sourceTree = "<group>"; };
+		C9B78C5F26F2CCB4002217AD /* DetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -107,6 +109,7 @@
 				C94B974C26F0392D001C905C /* SceneDelegate.swift */,
 				C94B974E26F0392D001C905C /* ViewController.swift */,
 				C94B975026F0392D001C905C /* Main.storyboard */,
+				C9B78C5F26F2CCB4002217AD /* DetailsViewController.swift */,
 				C94B975326F0392F001C905C /* Assets.xcassets */,
 				C94B975526F0392F001C905C /* LaunchScreen.storyboard */,
 				C94B975826F0392F001C905C /* Info.plist */,
@@ -269,6 +272,7 @@
 				C94B974B26F0392D001C905C /* AppDelegate.swift in Sources */,
 				C94B974D26F0392D001C905C /* SceneDelegate.swift in Sources */,
 				C955C6C126F192EA0083A284 /* Article.swift in Sources */,
+				C9B78C6026F2CCB4002217AD /* DetailsViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
