@@ -11,10 +11,12 @@ import UIKit
 
 
 class Articles: Codable {
+    let title : String
     let articles: [Article]
     
-    init(articles: [Article]) {
+    init(articles: [Article], title: String ) {
         self.articles = articles
+        self.title = title
     }
 }
 

@@ -29,7 +29,7 @@ class DetailsViewController: UIViewController {
         
         
         self.title=articleDetails!.authors
-        titleLabel.text="Title :"+articleDetails!.title
+        titleLabel.text=articleDetails!.title
         authorLabel.text="Author : "+articleDetails!.authors
         contentLabel.text="Content : "+articleDetails!.content
         dateLabel.text="Date : "+articleDetails!.date

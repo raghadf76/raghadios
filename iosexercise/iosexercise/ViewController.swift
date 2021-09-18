@@ -18,8 +18,9 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     final let url = URL(string:"https://no89n3nc7b.execute-api.ap-southeast-1.amazonaws.com/staging/exercise")
     
      var articles = [Article]()
+    var exeTitle : String = ""
     
-
+   
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,7 +30,9 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
 //        tableView.delegate=self
         tableView.dataSource=self
         
-        self.title = "iOS Exercise"
+//        self.title = "iOS Exercise"
+        
+//            "iOS Exercise"
         
 
     }
@@ -47,6 +50,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         URLSession.shared.dataTask(with: downloadURL) { [self] data, urlResponse, error in
             guard let data = data, error == nil, urlResponse != nil else {
                 print("something is wrong")
+                
                 return
             }
             
@@ -54,7 +58,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
 
             
             
-            
+//            print(decoder.decode(Articles.self, from: data))
             
             
             print("downloaded")
@@ -62,16 +66,16 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             {
                 let decoder = JSONDecoder()
                 
+                
                 let downloadedArticles = try decoder.decode(Articles.self, from: data)
                 
-//                print(downloadedArticles.articles[0].authors)
                 
                 
                 
+                print(downloadedArticles.title)
                 self.articles = downloadedArticles.articles
                 
-                print(self.articles)
-                
+                                
                 
 //                for i in articles{
 //                    if(downloadedArticles.articles[i].authors == " "){
@@ -82,6 +86,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
                 
 
             DispatchQueue.main.async {
+                self.title=downloadedArticles.title
                     self.tableView.reloadData()
                 }
             } catch {
@@ -133,6 +138,14 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         
 //        cell.contentView.backgroundColor = UIColor.darkGray
 //        cell.backgroundColor = UIColor.darkGray
+        
+        let imageView = UIImageView(frame: CGRect(x: 190, y: 70, width: cell.frame.width - 160, height: cell.frame.height - 30))
+        let image = UIImage(named: "threeCircle")
+        imageView.image = image
+        cell.backgroundView = UIView()
+        cell.backgroundView!.addSubview(imageView)
+        
+       
         
        
         
