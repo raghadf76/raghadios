@@ -37,9 +37,9 @@ class TableViewCell: UITableViewCell {
         // Initialization code
         cellTitleLabel.numberOfLines=0
         
-        self.imageViewCell.layoutIfNeeded()
-        imageViewCell.layer.cornerRadius = self.frame.height / 2.0
-        imageViewCell.layer.masksToBounds = true
+//        self.imageViewCell.layoutIfNeeded()
+//        imageViewCell.layer.cornerRadius = self.frame.height / 2.0
+//        imageViewCell.layer.masksToBounds = true
       
     }
 

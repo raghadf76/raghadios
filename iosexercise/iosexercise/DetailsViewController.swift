@@ -27,7 +27,7 @@ class DetailsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
+//        imageView =  CGRect(x: 0.0, y: 0.0, width: screen.width, height: screen.height * 0.9)
         self.title=articleDetails!.authors
         titleLabel.text=articleDetails!.title
         authorLabel.text="Author : "+articleDetails!.authors

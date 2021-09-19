@@ -18,6 +18,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     final let url = URL(string:"https://no89n3nc7b.execute-api.ap-southeast-1.amazonaws.com/staging/exercise")
     
      var articles = [Article]()
+    var articlesWithoutNull = [Article]()
     var exeTitle : String = ""
     
    
@@ -68,26 +69,46 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
                 
                 
                 let downloadedArticles = try decoder.decode(Articles.self, from: data)
-                
+//                downloadedArticles = try values.decodeIfPresent(String.self, forKey: .amount)
+//
                 
                 
                 
                 print(downloadedArticles.title)
                 self.articles = downloadedArticles.articles
+                print(self.articles)
+//                articlesWithoutNull.append(Article(title: "", authors: "", date: "", content: "", image_url: "", website: ""))
                 
+                print(articlesWithoutNull.count)
+//                self.articlesWithoutNull = downloadedArticles.articles
+//                print(self.articles[0].title )
                                 
-                
-//                for i in articles{
-//                    if(downloadedArticles.articles[i].authors == " "){
-//
-//
-//                    }
-//                }
+                let actualArticleNum = self.articles.count
+                var stopLoop = 0
+                var stopSecondLoop = 0
+                while(stopLoop<actualArticleNum ){
+                  
+                    if(downloadedArticles.articles[stopLoop].title != ""){
+                        
+//                        print(self.articles[stopLoop].title )
+                        print("raghad")
+//                        print(stopLoop)
+                       
+                        self.articlesWithoutNull.append(downloadedArticles.articles[stopLoop])
+                        print(self.articlesWithoutNull[stopLoop] )
+
+                    }
+                    
+                    stopLoop=stopLoop+1
+                    stopSecondLoop=stopSecondLoop+1
+                }
+
                 
 
             DispatchQueue.main.async {
                 self.title=downloadedArticles.title
                     self.tableView.reloadData()
+                print(self.articlesWithoutNull.count)
                 }
             } catch {
                 print("something wrong after downloaded")
@@ -99,7 +120,9 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return articles.count
+        print(articlesWithoutNull.count)
+        return articlesWithoutNull.count
+        
     }
     
 
@@ -110,13 +133,13 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         cell.layer.borderWidth = 2.0
         cell.layer.borderColor = UIColor.gray.cgColor
         
-        cell.cellTitleLabel.text = articles[indexPath.row].title
-        cell.authorLabel.text = " Author : "  + articles[indexPath.row].authors
+        cell.cellTitleLabel.text = articlesWithoutNull[indexPath.row].title
+        cell.authorLabel.text = " Author : "  + articlesWithoutNull[indexPath.row].authors
         
-        cell.dateLabel.text = " Date : "  + articles[indexPath.row].date
+        cell.dateLabel.text = " Date : "  + articlesWithoutNull[indexPath.row].date
   
         
-        if let imageURL = URL(string: articles[indexPath.row].image_url) {
+        if let imageURL = URL(string: articlesWithoutNull[indexPath.row].image_url) {
 //            DispatchQueue.global().async {
                 let data = try? Data(contentsOf: imageURL)
                 if let data = data {
@@ -139,11 +162,11 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
 //        cell.contentView.backgroundColor = UIColor.darkGray
 //        cell.backgroundColor = UIColor.darkGray
         
-        let imageView = UIImageView(frame: CGRect(x: 190, y: 70, width: cell.frame.width - 160, height: cell.frame.height - 30))
-        let image = UIImage(named: "threeCircle")
-        imageView.image = image
-        cell.backgroundView = UIView()
-        cell.backgroundView!.addSubview(imageView)
+//        let imageView = UIImageView(frame: CGRect(x: 190, y: 70, width: cell.frame.width - 160, height: cell.frame.height - 30))
+//        let image = UIImage(named: "threeCircle")
+//        imageView.image = image
+//        cell.backgroundView = UIView()
+//        cell.backgroundView!.addSubview(imageView)
         
        
         
@@ -173,7 +196,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         
         
         if let destination = segue.destination as? DetailsViewController{
-            destination.articleDetails = articles[(tableView.indexPathForSelectedRow?.row)!]
+            destination.articleDetails = articlesWithoutNull[(tableView.indexPathForSelectedRow?.row)!]
         }
         
         
