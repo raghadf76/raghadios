@@ -8,12 +8,14 @@
 import UIKit
 
 class DetailsViewController: UIViewController {
+    
+    var articleDetails:Article?
 
     @IBOutlet weak var titleLabel: UILabel!
+    
     @IBOutlet weak var imageView: UIImageView!
     
     @IBOutlet weak var authorLabel: UILabel!
-    var articleDetails:Article?
     
     @IBOutlet weak var contentLabel: UILabel!
     
@@ -27,18 +29,38 @@ class DetailsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-//        imageView =  CGRect(x: 0.0, y: 0.0, width: screen.width, height: screen.height * 0.9)
+
         self.title=articleDetails!.authors
+        
+        designCell()
+        let screenSize: CGRect = UIScreen.main.bounds
+        
+        print(screenSize.height*0.25)
+        // Do any additional setup after loading the view.
+    }
+    
+    
+    func designCell(){
+        //support multiple line
+        titleLabel.numberOfLines = 0
+        authorLabel.numberOfLines = 0
+        contentLabel.numberOfLines = 0
+        webLabel.numberOfLines = 0
+        
+        
         titleLabel.text=articleDetails!.title
         authorLabel.text="Author : "+articleDetails!.authors
         contentLabel.text="Content : "+articleDetails!.content
         dateLabel.text="Date : "+articleDetails!.date
         webLabel.text="Website : "+articleDetails!.website
         
-        titleLabel.numberOfLines = 0
-        authorLabel.numberOfLines = 0
-        contentLabel.numberOfLines = 0
-        webLabel.numberOfLines = 0
+        let neededHeight = UIScreen.main.bounds.height * 0.25
+        imageView.frame.size.height = neededHeight
+        imageView.frame.size.width=UIScreen.main.bounds.width
+        
+        print(neededHeight)
+        
+
         if let imageURL = URL(string:articleDetails!.image_url) {
             DispatchQueue.global().async {
                 let data = try? Data(contentsOf: imageURL)
@@ -46,15 +68,11 @@ class DetailsViewController: UIViewController {
                     let image = UIImage(data: data)
                     DispatchQueue.main.async {
 
-
-
-
                         self.imageView.image = image
                     }
                 }
             }
         }
-        // Do any additional setup after loading the view.
     }
     
 

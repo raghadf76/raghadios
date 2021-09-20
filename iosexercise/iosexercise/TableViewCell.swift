@@ -9,37 +9,20 @@ import UIKit
 
 class TableViewCell: UITableViewCell {
     
-    
     @IBOutlet weak var imageViewCell: UIImageView!
-    
-    
+
     @IBOutlet weak var cellTitleLabel: UILabel!
-    
-    
+
     @IBOutlet weak var authorLabel: UILabel!
-    
-    
 
-    
     @IBOutlet weak var dateLabel: UILabel!
-    
-    
 
-    
-
-    
-    
-    
-    
     
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
         cellTitleLabel.numberOfLines=0
         
-//        self.imageViewCell.layoutIfNeeded()
-//        imageViewCell.layer.cornerRadius = self.frame.height / 2.0
-//        imageViewCell.layer.masksToBounds = true
       
     }
 
