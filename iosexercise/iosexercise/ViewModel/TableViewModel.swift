@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class TableViewModel: UIViewController, UITableViewDataSource, UITableViewDelegate {
    
     @IBOutlet weak var tableView: UITableView!
    
@@ -25,6 +25,9 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         downloadJson()
         tableView.tableFooterView = UIView()
         tableView.dataSource=self
+        ChangeLayout()
+        
+        
         
 
     }
@@ -37,7 +40,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         
     }
     
-    
+
     
     
     func downloadJson() {
@@ -54,7 +57,6 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             {
                 let decoder = JSONDecoder()
                 let downloadedArticles = try decoder.decode(Articles.self, from: data)
-                print(downloadedArticles.title)
                 self.articles = downloadedArticles.articles
 
 
@@ -67,8 +69,6 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
                     if(downloadedArticles.articles[stopLoop].title != ""){
                        
                         self.articlesWithoutNull.append(downloadedArticles.articles[stopLoop])
-                        print(self.articlesWithoutNull[stopLoop] )
-
                     }
                     
                     stopLoop=stopLoop+1
@@ -92,30 +92,52 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     
     
-    
     // The sort orders are primarily based on the created date, title, and author of the article.
     
     func sortArticles(_ articlesWithoutNull: [Article]) -> [Article] {
         articlesWithoutNull.sorted { articleA, articleB in
             if articleA.date == articleB.date  {
-                
-                if articleA.title == articleB.title{
-                    return articleA.authors < articleB.authors
+                if articleA.title.prefix(1).uppercased() == articleB.title.prefix(1).uppercased(){
+
+                    
+                    if(articleA.authors.prefix(1).uppercased() < articleB.authors.prefix(1).uppercased()) {
+                        return articleA.authors > articleB.authors
+                }
+                    
+                    if(articleA.authors.prefix(1).uppercased() >= articleB.authors.prefix(1).uppercased()){
+                            return articleA.authors < articleB.authors
+                            
+                        }
+                    
+                    
                 }
                 
-                else{
+            
+                
+                else {
+                    
+                    
+                    if(articleA.title.prefix(1).uppercased() > articleB.title.prefix(1).uppercased()){
+                            return articleA.title > articleB.title
+                            }
+                
+                if(articleA.title.prefix(1).uppercased() <= articleB.title.prefix(1).uppercased()) {
                     return articleA.title < articleB.title
+                    
                 }
                 
-            }
-            return articleA.date > articleB.date
+                }
+         
+                    
+                }
+            
+            return articleA.date < articleB.date
 
             
         }
+        
+        
     }
-    
-
-    
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         print(articlesWithoutNull.count)
@@ -154,7 +176,20 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         return cell
     }
     
+    
+    
+    //Support Right-to-Left. (Layout Direction).  
+    func ChangeLayout(){
+        
+        let languagePrefix = Locale.preferredLanguages[0]
+       
+        if(languagePrefix == "ar-US"){
+            UIView.appearance().semanticContentAttribute = .forceRightToLeft
+        }else{
+            UIView.appearance().semanticContentAttribute = .forceLeftToRight
+        }
 
+    }
     
     // go to details screen
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -165,7 +200,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
         
-        if let destination = segue.destination as? DetailsViewController{
+        if let destination = segue.destination as? DetailsViewModel{
             destination.articleDetails = articlesWithoutNull[(tableView.indexPathForSelectedRow?.row)!]
         }
         

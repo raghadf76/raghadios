@@ -7,7 +7,7 @@
 
 import UIKit
 
-class DetailsViewController: UIViewController {
+class DetailsViewModel: UIViewController {
     
     var articleDetails:Article?
 
@@ -28,19 +28,18 @@ class DetailsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-
         self.title=articleDetails!.authors
-        
         designCell()
-        let screenSize: CGRect = UIScreen.main.bounds
-        
-        print(screenSize.height*0.25)
         // Do any additional setup after loading the view.
     }
     
     
     func designCell(){
+        
+        // the image should take full width and the height must be as 25% of the  screen height.
+        let screenSize: CGRect = UIScreen.main.bounds
+        imageView.frame = CGRect(x: 0, y: 0, width: screenSize.width, height: screenSize.height * 0.25)
+        
         //support multiple line
         titleLabel.numberOfLines = 0
         authorLabel.numberOfLines = 0
@@ -48,17 +47,12 @@ class DetailsViewController: UIViewController {
         webLabel.numberOfLines = 0
         
         
-        titleLabel.text=articleDetails!.title
+        titleLabel.text = articleDetails!.title
         authorLabel.text="Author : "+articleDetails!.authors
         contentLabel.text="Content : "+articleDetails!.content
         dateLabel.text="Date : "+articleDetails!.date
         webLabel.text="Website : "+articleDetails!.website
         
-        let neededHeight = UIScreen.main.bounds.height * 0.25
-        imageView.frame.size.height = neededHeight
-        imageView.frame.size.width=UIScreen.main.bounds.width
-        
-        print(neededHeight)
         
 
         if let imageURL = URL(string:articleDetails!.image_url) {
